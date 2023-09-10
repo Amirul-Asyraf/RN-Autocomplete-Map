@@ -6,6 +6,7 @@ const initialState = {
 	placeId: "",
 	preciseLocation: {},
 	searchHistory: [],
+	error: "",
 	isLoading: false,
 };
 
@@ -20,7 +21,8 @@ export const autocompleteSlice = createSlice({
 			state.locations = action.payload;
 			state.isLoading = false;
 		},
-		getLocationsFailure: (state) => {
+		getLocationsFailure: (state, action) => {
+			state.error = action.payload;
 			state.isLoading = false;
 		},
 		setSearchTerm: (state, action) => {
@@ -34,6 +36,10 @@ export const autocompleteSlice = createSlice({
 		},
 		getPreciseLocationSuccess: (state, action) => {
 			state.preciseLocation = action.payload;
+			state.isLoading = false;
+		},
+		getPreciseLocationFailure: (state, action) => {
+			state.error = action.payload;
 			state.isLoading = false;
 		},
 		setSavedLocations: (state, action) => {
@@ -53,6 +59,7 @@ export const {
 	getSearchTerm,
 	setPlaceDetails,
 	getPreciseLocationSuccess,
+	getPreciseLocationFailure,
 	setSavedLocations,
 	updateLocationsArrangement,
 } = autocompleteSlice.actions;
