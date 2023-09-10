@@ -39,6 +39,9 @@ export const autocompleteSlice = createSlice({
 		setSavedLocations: (state, action) => {
 			state.searchHistory.unshift(action.payload);
 		},
+		updateLocationsArrangement: (state, action) => {
+			state.searchHistory = action.payload;
+		},
 	},
 });
 
@@ -51,6 +54,7 @@ export const {
 	setPlaceDetails,
 	getPreciseLocationSuccess,
 	setSavedLocations,
+	updateLocationsArrangement,
 } = autocompleteSlice.actions;
 
 export const selectLocations = (state) => state.locations;

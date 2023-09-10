@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import { View, FlatList, StyleSheet, Keyboard, Text } from "react-native";
+import { SearchBar, List } from "antd-mobile-rn";
 import { useSelector, useDispatch } from "react-redux";
 import {
 	selectLocations,
 	setSearchTerm,
 	setPlaceDetails,
 	setSavedLocations,
+	updateLocationsArrangement,
 } from "./autocompSlice";
-import { SearchBar, List } from "antd-mobile-rn";
+import { duplicatePlace, locationExists } from "./autocompFunctions";
 
 const Item = List.Item;
 
@@ -15,9 +17,10 @@ const Autocomplete = () => {
 	const [showList, setShowList] = useState(false);
 	const [isFocused, setIsFocused] = useState(false);
 
-	const { locations, searchTerm, preciseLocation, searchHistory } =
-		useSelector(selectLocations);
+	const { locations, searchTerm, searchHistory } = useSelector(selectLocations);
 	const dispatch = useDispatch();
+
+	const trimmedSearchHistory = searchHistory.slice(0, 5);
 
 	const handleInputChange = (text) => {
 		setShowList(true);
@@ -33,12 +36,21 @@ const Autocomplete = () => {
 		setShowList(false);
 		Keyboard.dismiss();
 		dispatch(setSearchTerm(place.description));
-		dispatch(
-			setSavedLocations({
-				description: place.description,
-				place_id: place.place_id,
-			})
-		);
+
+		const duplicate = locationExists(searchHistory, place);
+
+		if (duplicate) {
+			const updatedList = duplicatePlace(searchHistory, place);
+			dispatch(updateLocationsArrangement(updatedList));
+		} else {
+			dispatch(
+				setSavedLocations({
+					description: place.description,
+					place_id: place.place_id,
+				})
+			);
+		}
+
 		dispatch(setPlaceDetails(place.place_id));
 	};
 
@@ -74,7 +86,7 @@ const Autocomplete = () => {
 				/>
 
 				{searchTerm == "" && isFocused && searchHistory.length > 0 ? (
-					<FlatList data={searchHistory} renderItem={locationItem} />
+					<FlatList data={trimmedSearchHistory} renderItem={locationItem} />
 				) : (
 					searchTerm &&
 					showList && (
