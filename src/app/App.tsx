@@ -1,6 +1,6 @@
-import { store } from "./src/app/store";
+import { store } from "./store";
 import { Provider } from "react-redux";
-import MainPage from "./src/screens/MainPage";
+import MainPage from "../screens/MainPage";
 
 export default function App() {
 	return (
