@@ -4,10 +4,10 @@ React Native (and Expo) single page app for creating a map using Google's Place 
 
 ## Tech Stack:
 
-**Framework:** React Native
-**State Management:** Redux
-**Asynchronous Flow Management:** Redux Saga
-**UI Library:** Ant Design for React Native
+**Framework:** React Native  
+**State Management:** Redux  
+**Asynchronous Flow Management:** Redux Saga  
+**UI Library:** Ant Design for React Native  
 
 ## How to use this repo:-
 
