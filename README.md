@@ -35,7 +35,7 @@ This app is an Expo managed workflow app. In order to run it, you will need to h
    Make sure to run the app using 'Expo Go' and not 'development build' (as a development build has not yet been created). You can switch to running on 'Expo Go' by pressing `s` after starting the server (this may not be applicable to you, in which case you may ignore).
 
 3. Run on device or simulator  
-   Device: After starting the server, scan the QR using your phone's camera/QR Scanner and the app will open up on Expo Go.
+   Device: After starting the server, scan the QR using your phone's camera/QR Scanner and the app will open up on Expo Go.  
    Simulator: After starting the server, press `i` or `a` to run the app on an iOS Simulator or an Android Emulator, respectively.
 
 ## Notes\*:
